@@ -1,4 +1,4 @@
- # Hostel Management App
+ # Simple Hostel Management System made as a Database course project. Handles basic CRUD, allocations, payments, and complaints.
 
  Node/Express + SQLite hostel management with a static HTML/CSS/JS frontend served from `public/`. Handles students, rooms, allocations, payments with late-fee rules, complaints, and basic dashboard metrics.
 
