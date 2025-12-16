@@ -9,9 +9,11 @@ app.use(express.static("public"));
 
 const MAX_MONTHLY_FEE = 500000; // upper guardrail for monthly fees 
 const MAX_ROOM_CAPACITY = 50; // prevent impossible room sizes
+const DB_PATH = process.env.DB_PATH || "./hostel.db";
+const PORT = process.env.PORT || 3000;
 
 // Create SQLite database
-const db = new sqlite3.Database("./hostel.db");
+const db = new sqlite3.Database(DB_PATH);
 
 // Create tables if they don't exist
 db.serialize(() => {
@@ -1296,4 +1298,4 @@ app.get('/floors/overview', (req, res) => {
 });
 
 // Start server
-app.listen(3000, () => console.log("Server running on http://localhost:3000"));
+app.listen(PORT, () => console.log(`Server running on http://localhost:${PORT}`));
