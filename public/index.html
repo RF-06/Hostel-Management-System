@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>HostelMate — Modern hostel ops</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500&display=swap" rel="stylesheet" />
+    <link rel="icon" type="image/svg+xml" href="img/logo.svg?v=2" />
+    <link rel="stylesheet" href="css/theme.css" />
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/components.css" />
+  </head>
+  <body data-page="landing" data-theme="light">
+    <div id="preloader" class="preloader">
+      <div class="loader"></div>
+    </div>
+    <header class="landing-header">
+      <a class="brand" href="#">
+        <img src="img/logo.svg" alt="HostelMate logo" width="38" />
+        HostelMate
+      </a>
+      <nav class="nav-links">
+        <a href="#floors" data-scroll="floors">Floors</a>
+        <a href="#amenities" data-scroll="amenities">Amenities</a>
+        <a href="#cta" data-scroll="cta">Admissions</a>
+        <a class="btn btn-secondary" href="dashboard.html" data-requires-auth="true">Launch Admin</a>
+      </nav>
+    </header>
+
+    <section class="hero">
+      <div class="hero-content">
+        <div>
+          <p class="badge" id="heroBadge">Pakistan-ready · Custom floors, rooms, and Wi‑Fi policies</p>
+          <h1>
+            Student information
+            <span class="gradient-text">organized in one place.</span>
+          </h1>
+          <p>
+            View student records, allocations, complaints, and payments in a single workspace. Floors, room types, and Wi‑Fi policies stay configurable for any hostel in Pakistan.
+          </p>
+          <div class="form-actions">
+            <a class="btn btn-primary" href="dashboard.html" data-requires-auth="true">Enter admin console</a>
+            <a class="btn btn-secondary" href="#floors" data-scroll="floors">Browse floors</a>
+          </div>
+          <div class="hero-stats" id="heroStats">
+            <article class="hero-stat">
+              <span>Ground floor</span>
+              <strong>Single · PKR 12,000</strong>
+            </article>
+            <article class="hero-stat">
+              <span>First floor</span>
+              <strong>Twin · PKR 6,000</strong>
+            </article>
+            <article class="hero-stat">
+              <span>Second floor</span>
+              <strong>Triple · PKR 4,000</strong>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="floors" class="section floors-section">
+      <div class="section-header">
+        <p class="badge">Floors & fees</p>
+        <h2>Flexible floors and room types.</h2>
+        <p>Every floor is mapped to a room type, per-student fee, and wifi policy. Cards update automatically as rooms are added from the admin console.</p>
+      </div>
+      <div id="floorGrid" class="floor-grid">
+        <article class="floor-card">
+          <header>
+            <h3>Loading floor plan…</h3>
+            <span class="wifi-pill">Syncing</span>
+          </header>
+          <p>Please wait while we sync the latest availability.</p>
+        </article>
+      </div>
+      <p id="wifiLegend" class="wifi-legend">Ground & first floors include mesh wifi. Second floor stays offline for quiet study.</p>
+    </section>
+
+    <section id="amenities" class="section amenities-section">
+      <div class="section-header">
+        <p class="badge">Resident essentials</p>
+        <h2>What every HostelMate bed includes</h2>
+        <p>We keep pricing predictable by bundling the boring stuff—utilities, support, compliance—so admins can focus on people.</p>
+      </div>
+      <div class="amenities-grid">
+        <article class="amenity-card">
+          <h3>Utilities bundled</h3>
+          <p>Electricity, filtered water, janitorial services, and bathroom supplies pooled per floor.</p>
+        </article>
+        <article class="amenity-card">
+          <h3>Security passes</h3>
+          <p>Digital check-ins with visitor logging, late-return alerts, and instant vacancy exports.</p>
+        </article>
+        <article class="amenity-card">
+          <h3>Complaints desk</h3>
+          <p>Residents raise maintenance or discipline issues from their phone; wardens get SLA timers.</p>
+        </article>
+        <article class="amenity-card">
+          <h3>Fee automation</h3>
+          <p>Single (12k), twin (6k), triple (4k). Payments reject anything else, eliminating manual math.</p>
+        </article>
+        <article class="amenity-card">
+          <h3>Connectivity rules</h3>
+          <p>Wifi toggles per floor: ground & first stay online, second floor goes offline at 10pm sharp.</p>
+        </article>
+        <article class="amenity-card">
+          <h3>Move-in workflow</h3>
+          <p>ID verification, CNIC validation, and address capture happen before the first key is issued.</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="cta" class="cta">
+      <div class="glass-panel">
+        <h3>Ready to onboard the next batch?</h3>
+        <p>HostelMate keeps modern hostels transparent for residents, wardens, and finance alike.</p>
+        <div class="form-actions" style="justify-content: center;">
+          <a href="dashboard.html" class="btn btn-primary" data-requires-auth="true">Open admin</a>
+          <a href="students.html" class="btn btn-secondary">Review residents</a>
+        </div>
+      </div>
+    </section>
+
+    <footer class="site-footer">
+      <span>© <span id="year"></span> HostelMate. Built for practical hostel ops.</span>
+      <div class="nav-links">
+        <a href="dashboard.html" data-requires-auth="true">Dashboard</a>
+        <a href="settings.html">Settings</a>
+        <a href="mailto:team@hostelmate.app">Contact</a>
+      </div>
+    </footer>
+
+    <script type="module" src="js/main.js"></script>
+    <script>
+      document.getElementById("year").textContent = new Date().getFullYear();
+    </script>
+  </body>
+</html>

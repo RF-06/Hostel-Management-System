@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>HostelMate · Settings</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500&display=swap" rel="stylesheet" />
+    <link rel="icon" type="image/svg+xml" href="img/logo.svg?v=2" />
+    <link rel="stylesheet" href="css/theme.css" />
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/components.css" />
+    <link rel="stylesheet" href="css/forms.css" />
+  </head>
+  <body data-page="settings" data-theme="light">
+    <div id="preloader" class="preloader">
+      <div class="loader"></div>
+    </div>
+    <div class="app-shell">
+      <aside class="sidebar">
+        <a class="brand" href="index.html">
+          <img src="img/logo.svg" alt="HostelMate" width="34" />
+          HostelMate
+        </a>
+        <nav class="sidebar-nav">
+          <a href="dashboard.html" data-nav="dashboard"><span class="icon">🏠</span><span>Dashboard</span></a>
+          <a href="students.html" data-nav="students"><span class="icon">🎓</span><span>Students</span></a>
+          <a href="rooms.html" data-nav="rooms"><span class="icon">🏢</span><span>Rooms</span></a>
+          <a href="allocate.html" data-nav="allocate"><span class="icon">🔗</span><span>Allocations</span></a>
+          <a href="complaints.html" data-nav="complaints"><span class="icon">💬</span><span>Complaints</span></a>
+          <a href="payments.html" data-nav="payments"><span class="icon">💳</span><span>Payments</span></a>
+          <a href="settings.html" data-nav="settings" class="active"><span class="icon">⚙️</span><span>Settings</span></a>
+        </nav>
+      </aside>
+      <div class="main-area">
+        <header class="topbar">
+          <div class="search-bar">
+            <span>⌘ K</span>
+            <input type="search" class="global-search" placeholder="Search students or rooms" autocomplete="off" />
+          </div>
+          <div class="topbar-actions">
+            <button class="btn btn-ghost" data-action="toggle-sidebar">☰</button>
+            <button class="btn btn-ghost" data-action="toggle-theme">◑</button>
+          </div>
+        </header>
+
+        <main class="content-area">
+          <section class="section-card">
+            <header>
+              <div>
+                <p class="badge">Appearance</p>
+                <h2>Preferences</h2>
+              </div>
+            </header>
+            <div class="list-grid">
+              <article class="list-card">
+                <header>
+                  <h4>Dark mode</h4>
+                </header>
+                <p>Switch between light and dark themes.</p>
+                <label class="form-control" style="flex-direction: row; align-items: center; gap: 0.75rem;">
+                  <input type="checkbox" id="themeSwitch" />
+                  Enable dark theme
+                </label>
+              </article>
+            </div>
+          </section>
+
+          <section class="section-card">
+            <header>
+              <div>
+                <p class="badge">Workspace</p>
+                <h3>Hostel profile</h3>
+                <p style="margin-top:0.35rem;">Update branding, city, and contact shown on the landing page.</p>
+              </div>
+            </header>
+            <form id="hostelProfileForm" class="form-grid">
+              <div class="form-control">
+                <label for="hostel_name">Hostel name</label>
+                <input type="text" id="hostel_name" name="hostel_name" placeholder="Al-Noor Residency" required />
+              </div>
+              <div class="form-control">
+                <label for="location">City / location</label>
+                <input type="text" id="location" name="location" placeholder="City" required />
+              </div>
+              <div class="form-control">
+                <label for="contact_email">Contact email</label>
+                <input type="email" id="contact_email" name="contact_email" placeholder="ops@hostel.com" />
+              </div>
+              <div class="form-control">
+                <label for="logo_url">Logo URL (optional)</label>
+                <input type="url" id="logo_url" name="logo_url" placeholder="https://example.com/logo.png" />
+              </div>
+              <div class="form-actions" style="grid-column: 1 / -1;">
+                <button class="btn btn-primary" type="submit">Save profile</button>
+                <button class="btn btn-ghost" type="reset">Reset</button>
+                <span id="hostelProfileStatus" class="badge">Not saved</span>
+              </div>
+            </form>
+          </section>
+
+          <section class="section-card">
+            <header>
+              <div>
+                <p class="badge">System</p>
+                <h3>Data integrity</h3>
+              </div>
+            </header>
+            <div class="insights-grid">
+              <div class="insight">
+                <strong>API</strong>
+                <p>Express + SQLite</p>
+              </div>
+              <div class="insight">
+                <strong>Uptime</strong>
+                <p>99.9%</p>
+              </div>
+              <div class="insight">
+                <strong>Build</strong>
+                <p>Vanilla JS</p>
+              </div>
+            </div>
+          </section>
+
+          <section class="section-card">
+            <header>
+              <div>
+                <p class="badge">Workspace</p>
+                <h3>Hostel data tips</h3>
+              </div>
+            </header>
+            <div class="list-grid">
+              <article class="list-card">
+                <h4>Floors & rooms</h4>
+                <p>Keep floor numbers consistent (e.g., 1xx ground, 2xx first) to make allocations clearer.</p>
+              </article>
+              <article class="list-card">
+                <h4>Wi‑Fi availability</h4>
+                <p>Set Wi‑Fi per room/floor in Rooms; it appears on the landing overview.</p>
+              </article>
+              <article class="list-card">
+                <h4>Exports</h4>
+                <p>Use the Rooms and Students pages to review and export live data as needed.</p>
+              </article>
+            </div>
+          </section>
+        </main>
+
+        <footer class="app-footer">© <span id="year"></span> HostelMate • Settings.</footer>
+      </div>
+    </div>
+
+    <div id="modal" class="modal">
+      <div class="modal-content">
+        <p id="modal-message">Are you sure?</p>
+        <div class="form-actions">
+          <button id="modal-cancel" class="btn btn-secondary" type="button">Cancel</button>
+          <button id="modal-confirm" class="btn btn-primary" type="button">Confirm</button>
+        </div>
+      </div>
+    </div>
+    <div id="toast-container" class="toast-container"></div>
+
+    <script>
+      document.getElementById("year").textContent = new Date().getFullYear();
+      window.addEventListener("demo-toast", () => {
+        const toastEvt = new CustomEvent("show-toast", { detail: { message: "This is a sample toast" } });
+        window.dispatchEvent(toastEvt);
+      });
+    </script>
+    <script type="module" src="js/main.js"></script>
+  </body>
+</html>
+

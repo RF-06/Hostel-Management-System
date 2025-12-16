@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>HostelMate · Edit Student</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500&display=swap" rel="stylesheet" />
+    <link rel="icon" type="image/svg+xml" href="img/logo.svg?v=2" />
+    <link rel="stylesheet" href="css/theme.css" />
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/components.css" />
+    <link rel="stylesheet" href="css/forms.css" />
+  </head>
+  <body data-page="edit-student" data-theme="light">
+    <div id="preloader" class="preloader">
+      <div class="loader"></div>
+    </div>
+    <div class="app-shell">
+      <aside class="sidebar">
+        <a class="brand" href="index.html">
+          <img src="img/logo.svg" alt="HostelMate" width="34" />
+          HostelMate
+        </a>
+        <nav class="sidebar-nav">
+          <a href="dashboard.html" data-nav="dashboard"><span class="icon">🏠</span><span>Dashboard</span></a>
+          <a href="students.html" data-nav="students"><span class="icon">🎓</span><span>Students</span></a>
+          <a href="add-student.html" data-nav="add-student"><span class="icon">➕</span><span>Add Student</span></a>
+          <a href="rooms.html" data-nav="rooms"><span class="icon">🏢</span><span>Rooms</span></a>
+          <a href="allocate.html" data-nav="allocate"><span class="icon">🔗</span><span>Allocations</span></a>
+          <a href="complaints.html" data-nav="complaints"><span class="icon">💬</span><span>Complaints</span></a>
+          <a href="payments.html" data-nav="payments"><span class="icon">💳</span><span>Payments</span></a>
+          <a href="settings.html" data-nav="settings"><span class="icon">⚙️</span><span>Settings</span></a>
+        </nav>
+      </aside>
+      <div class="main-area">
+        <header class="topbar">
+          <div class="search-bar">
+            <span>⌘ K</span>
+            <input type="search" class="global-search" placeholder="Search students or rooms" autocomplete="off" />
+          </div>
+          <div class="topbar-actions">
+            <button class="btn btn-ghost" data-action="toggle-sidebar">☰</button>
+            <button class="btn btn-ghost" data-action="toggle-theme">◑</button>
+          </div>
+        </header>
+
+        <main class="content-area">
+          <section class="section-card">
+            <header>
+              <div>
+                <p class="badge">Students</p>
+                <h2>Edit student</h2>
+              </div>
+              <a class="btn btn-secondary" href="students.html">Back to list</a>
+            </header>
+            <p id="editStatus" class="badge warning">Loading...</p>
+            <form id="editStudentForm">
+              <div class="form-grid">
+                <div class="form-control">
+                  <label for="name">Full name</label>
+                  <input type="text" id="name" name="name" pattern="[A-Za-z ]+" title="Letters and spaces only" required />
+                </div>
+                <div class="form-control">
+                  <label for="department">Department</label>
+                  <input type="text" id="department" name="department" pattern="[A-Za-z ]+" title="Letters and spaces only" required />
+                </div>
+                <div class="form-control">
+                  <label for="cnic">CNIC</label>
+                  <input type="text" id="cnic" name="cnic" pattern="\d{5}-\d{7}-\d" title="Format: 12345-1234567-1" inputmode="numeric" required />
+                </div>
+                <div class="form-control">
+                  <label for="phone">Phone</label>
+                  <input type="tel" id="phone" name="phone" pattern="(\+92|0)?3\d{2}-?\d{7}" title="Pakistani mobile e.g. 0300-1234567" inputmode="tel" required />
+                </div>
+                <div class="form-control" style="grid-column: span 2;">
+                  <label for="address">Address</label>
+                  <textarea id="address" name="address" maxlength="100" minlength="6" required></textarea>
+                </div>
+              </div>
+              <div class="form-actions">
+                <button class="btn btn-primary" type="submit">Save changes</button>
+                <a class="btn btn-ghost" href="students.html">Cancel</a>
+              </div>
+            </form>
+          </section>
+        </main>
+
+        <footer class="app-footer">© <span id="year"></span> HostelMate • Student updates.</footer>
+      </div>
+    </div>
+
+    <div id="modal" class="modal">
+      <div class="modal-content">
+        <p id="modal-message">Are you sure?</p>
+        <div class="form-actions">
+          <button id="modal-cancel" class="btn btn-secondary" type="button">Cancel</button>
+          <button id="modal-confirm" class="btn btn-primary" type="button">Confirm</button>
+        </div>
+      </div>
+    </div>
+    <div id="toast-container" class="toast-container"></div>
+
+    <script>
+      document.getElementById("year").textContent = new Date().getFullYear();
+    </script>
+    <script type="module" src="js/main.js"></script>
+  </body>
+</html>
+

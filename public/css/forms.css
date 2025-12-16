@@ -1,0 +1,116 @@
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1.25rem;
+}
+
+.form-control {
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+}
+
+.form-control.searchable {
+  position: relative;
+}
+
+.form-control .lookup-results {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: calc(100% + 4px);
+}
+
+.form-control label {
+  font-size: 0.9rem;
+  color: var(--color-text-muted);
+  font-weight: 600;
+}
+
+.form-control input,
+.form-control select,
+.form-control textarea {
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  padding: 0.85rem 1rem;
+  font-size: 1rem;
+  background: var(--color-bg-alt);
+  color: var(--color-text);
+  transition: border var(--transition-base), box-shadow var(--transition-base), transform var(--transition-base);
+}
+
+.form-control textarea {
+  min-height: 120px;
+  resize: vertical;
+}
+
+.form-control input:focus,
+.form-control select:focus,
+.form-control textarea:focus {
+  border-color: rgba(90, 84, 255, 0.6);
+  box-shadow: 0 0 0 3px rgba(90, 84, 255, 0.18);
+  outline: none;
+}
+
+.form-actions {
+  margin-top: 1.5rem;
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.modal .form-actions {
+  justify-content: flex-end;
+}
+
+.filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.filters .form-control {
+  flex: 1;
+  min-width: 180px;
+}
+
+.empty-state {
+  text-align: center;
+  padding: 2rem;
+  color: var(--color-text-muted);
+}
+
+.empty-state svg {
+  width: 60px;
+  margin: 0 auto 1rem;
+  opacity: 0.5;
+}
+
+.list-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1rem;
+}
+
+.list-card {
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: 1rem;
+  background: var(--color-bg-alt);
+}
+
+.list-card h4 {
+  margin: 0 0 0.25rem;
+}
+
+.list-card p {
+  margin: 0.1rem 0;
+  color: var(--color-text-muted);
+}
+
+.form-hint {
+  margin-top: 0.5rem;
+  font-size: 0.9rem;
+  color: var(--color-text-muted);
+}
+

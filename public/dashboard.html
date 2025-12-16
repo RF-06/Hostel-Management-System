@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>HostelMate · Dashboard</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500&display=swap" rel="stylesheet" />
+    <link rel="icon" type="image/svg+xml" href="img/logo.svg?v=2" />
+    <link rel="stylesheet" href="css/theme.css" />
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/components.css" />
+    <link rel="stylesheet" href="css/dashboard.css" />
+  </head>
+  <body data-page="dashboard" data-theme="light">
+    <div id="preloader" class="preloader">
+      <div class="loader"></div>
+    </div>
+    <div class="app-shell">
+      <aside class="sidebar">
+        <a class="brand" href="index.html">
+          <img src="img/logo.svg" alt="HostelMate" width="34" />
+          HostelMate
+        </a>
+        <nav class="sidebar-nav">
+          <a href="dashboard.html" data-nav="dashboard" class="active"><span class="icon">🏠</span><span>Dashboard</span></a>
+          <a href="students.html" data-nav="students"><span class="icon">🎓</span><span>Students</span></a>
+          <a href="add-student.html" data-nav="add-student"><span class="icon">➕</span><span>Add Student</span></a>
+          <a href="rooms.html" data-nav="rooms"><span class="icon">🏢</span><span>Rooms</span></a>
+          <a href="add-room.html" data-nav="add-room"><span class="icon">🛏️</span><span>Add Room</span></a>
+          <a href="allocate.html" data-nav="allocate"><span class="icon">🔗</span><span>Allocations</span></a>
+          <a href="complaints.html" data-nav="complaints"><span class="icon">💬</span><span>Complaints</span></a>
+          <a href="payments.html" data-nav="payments"><span class="icon">💳</span><span>Payments</span></a>
+          <a href="settings.html" data-nav="settings"><span class="icon">⚙️</span><span>Settings</span></a>
+        </nav>
+        <div class="cta-card">
+          <p>Need an overview?</p>
+          <strong>Download daily report</strong>
+          <a class="btn btn-ghost" href="#">Export CSV</a>
+        </div>
+      </aside>
+      <div class="main-area">
+        <header class="topbar">
+          <div class="search-bar">
+            <span>⌘ K</span>
+            <input type="search" class="global-search" placeholder="Search students or rooms" autocomplete="off" />
+          </div>
+          <div class="topbar-actions">
+            <button class="btn btn-ghost" data-action="toggle-sidebar">☰</button>
+            <button class="btn btn-ghost" data-action="toggle-theme">◑</button>
+          </div>
+        </header>
+
+        <main class="content-area">
+          <section class="section-card">
+            <header>
+              <div>
+                <h2>Operations dashboard</h2>
+              </div>
+              <a class="btn btn-secondary" href="students.html">Manage students</a>
+            </header>
+            <div class="stat-cards">
+              <article class="stat-card">
+                <h4>Students</h4>
+                <strong id="metricStudents">0</strong>
+                <span class="badge success">live</span>
+              </article>
+              <article class="stat-card">
+                <h4>Rooms</h4>
+                <strong id="metricRooms">0</strong>
+              </article>
+              <article class="stat-card">
+                <h4>Allocations</h4>
+                <strong id="metricAllocations">0</strong>
+              </article>
+              <article class="stat-card">
+                <h4>Vacant rooms</h4>
+                <strong id="metricVacant">0</strong>
+              </article>
+              <article class="stat-card">
+                <h4>Pending complaints</h4>
+                <strong id="metricComplaints">0</strong>
+              </article>
+              <article class="stat-card">
+                <h4>Payments (PKR)</h4>
+                <strong id="metricPayments">PKR 0</strong>
+              </article>
+            </div>
+          </section>
+
+          <section class="section-card dashboard-grid">
+            <div class="chart-card">
+              <header>
+                <div>
+                  <p class="badge">Finance</p>
+                  <h3>Payment velocity</h3>
+                </div>
+              </header>
+              <canvas id="paymentsChart" width="420" height="260"></canvas>
+              <div class="chart-legend">
+                <span style="color: #5a54ff;">Collections</span>
+                <span style="color: #8b5cf6;">Forecast</span>
+              </div>
+            </div>
+            <div class="highlight-card">
+              <p>Capacity forecast</p>
+              <h3>Optimize allocation in seconds.</h3>
+              <p>Monitor real-time occupancy, anticipate shortages, and trigger room provisioning workflows.</p>
+              <div class="insights-grid">
+                <div class="insight">
+                  <strong id="insightBeds">—</strong>
+                  <p>Open beds</p>
+                </div>
+                <div class="insight">
+                  <strong id="insightVacantRooms">—</strong>
+                  <p>Vacant rooms</p>
+                </div>
+                <div class="insight">
+                  <strong id="insightComplaints">—</strong>
+                  <p>Pending complaints</p>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <section class="section-card">
+            <header>
+              <div>
+                <p class="badge">Activity</p>
+                <h3>Latest allocations</h3>
+              </div>
+              <a class="btn btn-secondary" href="allocate.html">Allocate student</a>
+            </header>
+            <div class="timeline" id="allocationTimeline"></div>
+          </section>
+        </main>
+
+        <footer class="app-footer">© <span id="year"></span> HostelMate • Crafted for admin excellence.</footer>
+      </div>
+    </div>
+
+    <div id="modal" class="modal">
+      <div class="modal-content">
+        <p id="modal-message">Are you sure?</p>
+        <div class="form-actions">
+          <button id="modal-cancel" class="btn btn-secondary" type="button">Cancel</button>
+          <button id="modal-confirm" class="btn btn-primary" type="button">Confirm</button>
+        </div>
+      </div>
+    </div>
+    <div id="toast-container" class="toast-container"></div>
+
+    <script>
+      document.getElementById("year").textContent = new Date().getFullYear();
+    </script>
+    <script type="module" src="js/main.js"></script>
+  </body>
+</html>
+

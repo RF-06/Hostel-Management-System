@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>HostelMate · Allocate Room</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500&display=swap" rel="stylesheet" />
+    <link rel="icon" type="image/svg+xml" href="img/logo.svg?v=2" />
+    <link rel="stylesheet" href="css/theme.css" />
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/components.css" />
+    <link rel="stylesheet" href="css/forms.css" />
+  </head>
+  <body data-page="allocate" data-theme="light">
+    <div id="preloader" class="preloader">
+      <div class="loader"></div>
+    </div>
+    <div class="app-shell">
+      <aside class="sidebar">
+        <a class="brand" href="index.html">
+          <img src="img/logo.svg" alt="HostelMate" width="34" />
+          HostelMate
+        </a>
+        <nav class="sidebar-nav">
+          <a href="dashboard.html" data-nav="dashboard"><span class="icon">🏠</span><span>Dashboard</span></a>
+          <a href="students.html" data-nav="students"><span class="icon">🎓</span><span>Students</span></a>
+          <a href="add-student.html" data-nav="add-student"><span class="icon">➕</span><span>Add Student</span></a>
+          <a href="rooms.html" data-nav="rooms"><span class="icon">🏢</span><span>Rooms</span></a>
+          <a href="add-room.html" data-nav="add-room"><span class="icon">🛏️</span><span>Add Room</span></a>
+          <a href="allocate.html" data-nav="allocate" class="active"><span class="icon">🔗</span><span>Allocations</span></a>
+          <a href="complaints.html" data-nav="complaints"><span class="icon">💬</span><span>Complaints</span></a>
+          <a href="payments.html" data-nav="payments"><span class="icon">💳</span><span>Payments</span></a>
+          <a href="settings.html" data-nav="settings"><span class="icon">⚙️</span><span>Settings</span></a>
+        </nav>
+      </aside>
+      <div class="main-area">
+        <header class="topbar">
+          <div class="search-bar">
+            <span>⌘ K</span>
+            <input type="search" class="global-search" placeholder="Search students or rooms" autocomplete="off" />
+          </div>
+          <div class="topbar-actions">
+            <button class="btn btn-ghost" data-action="toggle-sidebar">☰</button>
+            <button class="btn btn-ghost" data-action="toggle-theme">◑</button>
+          </div>
+        </header>
+
+        <main class="content-area">
+          <section class="section-card">
+            <header>
+              <div>
+                <p class="badge">Allocations</p>
+                <h2>Assign student to room</h2>
+              </div>
+              <a class="btn btn-secondary" href="rooms.html">Room overview</a>
+            </header>
+            <form id="allocateForm">
+              <div class="form-grid">
+                <div class="form-control searchable">
+                  <label for="allocationStudentSearch">Student</label>
+                  <input type="search" id="allocationStudentSearch" placeholder="Search name, CNIC or department" autocomplete="off" />
+                  <div class="lookup-results" id="allocationStudentResults"></div>
+                  <input type="hidden" id="allocationStudent" required />
+                </div>
+                <div class="form-control">
+                  <label for="allocationRoom">Room</label>
+                  <select id="allocationRoom" required>
+                    <option value="">Loading...</option>
+                  </select>
+                </div>
+              </div>
+              <div class="form-actions">
+                <button class="btn btn-primary" type="submit">Allocate</button>
+                <a class="btn btn-ghost" href="students.html">Manage students</a>
+              </div>
+            </form>
+          </section>
+
+          <section class="section-card">
+            <header>
+              <h3>Room snapshot</h3>
+            </header>
+            <div id="roomSnapshot" class="list-grid"></div>
+          </section>
+
+          <section class="section-card">
+            <header>
+              <div>
+                <p class="badge">Roster</p>
+                <h3>Current allocations</h3>
+              </div>
+              <div class="form-control" style="max-width: 280px;">
+                <label for="allocationSearch">Search</label>
+                <input type="search" id="allocationSearch" placeholder="Student, room, date" />
+              </div>
+            </header>
+            <div class="table-wrapper">
+              <table id="allocationsTable">
+                <thead>
+                  <tr>
+                    <th>Student</th>
+                    <th>Room</th>
+                    <th>Type</th>
+                    <th>Monthly Fee</th>
+                    <th>Date</th>
+                    <th>Student ID</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody></tbody>
+              </table>
+            </div>
+          </section>
+        </main>
+
+        <footer class="app-footer">© <span id="year"></span> HostelMate • Allocation desk.</footer>
+      </div>
+    </div>
+
+    <div id="modal" class="modal">
+      <div class="modal-content">
+        <p id="modal-message">Are you sure?</p>
+        <div class="form-actions">
+          <button id="modal-cancel" class="btn btn-secondary" type="button">Cancel</button>
+          <button id="modal-confirm" class="btn btn-primary" type="button">Confirm</button>
+        </div>
+      </div>
+    </div>
+    <div id="toast-container" class="toast-container"></div>
+
+    <div id="transferModal" class="modal">
+      <div class="modal-content">
+        <h4>Transfer room</h4>
+        <p>Select a target room with available beds.</p>
+        <div class="form-control">
+          <label for="transferRoomSelect">Target room</label>
+          <select id="transferRoomSelect"></select>
+        </div>
+        <div class="form-actions">
+          <button id="transfer-cancel" class="btn btn-secondary" type="button">Cancel</button>
+          <button id="transfer-confirm" class="btn btn-primary" type="button">Transfer</button>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      document.getElementById("year").textContent = new Date().getFullYear();
+    </script>
+    <script type="module" src="js/main.js"></script>
+  </body>
+</html>
+

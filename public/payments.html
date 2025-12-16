@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>HostelMate · Payments</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500&display=swap" rel="stylesheet" />
+    <link rel="icon" type="image/svg+xml" href="img/logo.svg?v=2" />
+    <link rel="stylesheet" href="css/theme.css" />
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/components.css" />
+    <link rel="stylesheet" href="css/forms.css" />
+  </head>
+  <body data-page="payments" data-theme="light">
+    <div id="preloader" class="preloader">
+      <div class="loader"></div>
+    </div>
+    <div class="app-shell">
+      <aside class="sidebar">
+        <a class="brand" href="index.html">
+          <img src="img/logo.svg" alt="HostelMate" width="34" />
+          HostelMate
+        </a>
+        <nav class="sidebar-nav">
+          <a href="dashboard.html" data-nav="dashboard"><span class="icon">🏠</span><span>Dashboard</span></a>
+          <a href="students.html" data-nav="students"><span class="icon">🎓</span><span>Students</span></a>
+          <a href="rooms.html" data-nav="rooms"><span class="icon">🏢</span><span>Rooms</span></a>
+          <a href="allocate.html" data-nav="allocate"><span class="icon">🔗</span><span>Allocations</span></a>
+          <a href="complaints.html" data-nav="complaints"><span class="icon">💬</span><span>Complaints</span></a>
+          <a href="payments.html" data-nav="payments" class="active"><span class="icon">💳</span><span>Payments</span></a>
+          <a href="settings.html" data-nav="settings"><span class="icon">⚙️</span><span>Settings</span></a>
+        </nav>
+      </aside>
+      <div class="main-area">
+        <header class="topbar">
+          <div class="search-bar">
+            <span>⌘ K</span>
+            <input type="search" class="global-search" placeholder="Search workspace" autocomplete="off" />
+          </div>
+          <div class="topbar-actions">
+            <button class="btn btn-ghost" data-action="toggle-sidebar">☰</button>
+            <button class="btn btn-ghost" data-action="toggle-theme">◑</button>
+          </div>
+        </header>
+
+        <main class="content-area">
+          <section class="section-card">
+            <header>
+              <div>
+                <p class="badge">Payments</p>
+                <h2>Record payment</h2>
+              </div>
+              <div class="badge success">Total <span id="paymentsTotal">PKR 0</span></div>
+            </header>
+            <form id="paymentForm">
+              <div class="form-grid">
+                <div class="form-control searchable">
+                  <label for="paymentStudentSearch">Student</label>
+                  <input type="search" id="paymentStudentSearch" placeholder="Search student" autocomplete="off" />
+                  <div class="lookup-results" id="paymentStudentResults"></div>
+                  <input type="hidden" id="paymentStudent" name="student_id" required />
+                </div>
+                <div class="form-control">
+                  <label for="amount">Amount</label>
+                  <input type="number" min="1" id="amount" name="amount" placeholder="5000" required />
+                </div>
+              </div>
+              <p class="form-hint" id="paymentDueHint">Select a student to view monthly dues.</p>
+          <div class="section-card" style="padding: 1rem; border: 1px dashed var(--color-border); background: var(--color-bg-alt);">
+            <div style="display: flex; align-items: center; justify-content: space-between; gap: 0.75rem; flex-wrap: wrap;">
+              <p class="form-hint" style="margin: 0;">Current fee status</p>
+              <span class="badge" id="feeStatusBadge">—</span>
+            </div>
+            <div class="form-grid" style="margin-top: 0.75rem; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));">
+              <div>
+                <p class="form-hint">Due date</p>
+                <strong id="feeDueDate">—</strong>
+              </div>
+              <div>
+                <p class="form-hint">Fine</p>
+                <strong id="feeFine">PKR 0</strong>
+              </div>
+              <div>
+                <p class="form-hint">Total payable</p>
+                <strong id="feeTotal">PKR 0</strong>
+              </div>
+            </div>
+            <p class="form-hint" id="feeStatusNote" style="margin-top: 0.5rem;">Select a student to view billing details.</p>
+          </div>
+              <div class="form-actions">
+                <button class="btn btn-primary" type="submit">Record payment</button>
+                <button class="btn btn-ghost" type="reset">Reset</button>
+              </div>
+            </form>
+          </section>
+
+          <section class="section-card">
+            <header>
+              <div>
+                <p class="badge">History</p>
+                <h3>Payment log</h3>
+              </div>
+              <div class="form-control searchable" style="max-width: 280px;">
+                <label for="paymentFilterSearch">Filter by student</label>
+                <input type="search" id="paymentFilterSearch" placeholder="Search student (optional)" autocomplete="off" />
+                <div class="lookup-results" id="paymentFilterResults"></div>
+                <input type="hidden" id="paymentFilterStudent" />
+              </div>
+            </header>
+            <div class="table-wrapper">
+              <table id="paymentsTable">
+                <thead>
+                  <tr>
+                    <th>ID</th>
+                    <th>Student</th>
+                    <th>Amount Paid (PKR)</th>
+                    <th>Payment Date</th>
+                    <th>Status</th>
+                    <th>Due Date</th>
+                    <th>Fine (PKR)</th>
+                    <th>Total Payable (PKR)</th>
+                  </tr>
+                </thead>
+                <tbody></tbody>
+              </table>
+            </div>
+          </section>
+        </main>
+
+        <footer class="app-footer">© <span id="year"></span> HostelMate • Finance tower.</footer>
+      </div>
+    </div>
+
+    <div id="modal" class="modal">
+      <div class="modal-content">
+        <p id="modal-message">Are you sure?</p>
+        <div class="form-actions">
+          <button id="modal-cancel" class="btn btn-secondary" type="button">Cancel</button>
+          <button id="modal-confirm" class="btn btn-primary" type="button">Confirm</button>
+        </div>
+      </div>
+    </div>
+    <div id="toast-container" class="toast-container"></div>
+
+    <script>
+      document.getElementById("year").textContent = new Date().getFullYear();
+    </script>
+    <script type="module" src="js/main.js"></script>
+  </body>
+</html>
+

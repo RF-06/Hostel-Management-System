@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>HostelMate · Rooms</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500&display=swap" rel="stylesheet" />
+    <link rel="icon" type="image/svg+xml" href="img/logo.svg?v=2" />
+    <link rel="stylesheet" href="css/theme.css" />
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/components.css" />
+    <link rel="stylesheet" href="css/forms.css" />
+  </head>
+  <body data-page="rooms" data-theme="light">
+    <div id="preloader" class="preloader">
+      <div class="loader"></div>
+    </div>
+    <div class="app-shell">
+      <aside class="sidebar">
+        <a class="brand" href="index.html">
+          <img src="img/logo.svg" alt="HostelMate" width="34" />
+          HostelMate
+        </a>
+        <nav class="sidebar-nav">
+          <a href="dashboard.html" data-nav="dashboard"><span class="icon">🏠</span><span>Dashboard</span></a>
+          <a href="students.html" data-nav="students"><span class="icon">🎓</span><span>Students</span></a>
+          <a href="add-student.html" data-nav="add-student"><span class="icon">➕</span><span>Add Student</span></a>
+          <a href="rooms.html" data-nav="rooms" class="active"><span class="icon">🏢</span><span>Rooms</span></a>
+          <a href="add-room.html" data-nav="add-room"><span class="icon">🛏️</span><span>Add Room</span></a>
+          <a href="allocate.html" data-nav="allocate"><span class="icon">🔗</span><span>Allocations</span></a>
+          <a href="complaints.html" data-nav="complaints"><span class="icon">💬</span><span>Complaints</span></a>
+          <a href="payments.html" data-nav="payments"><span class="icon">💳</span><span>Payments</span></a>
+          <a href="settings.html" data-nav="settings"><span class="icon">⚙️</span><span>Settings</span></a>
+        </nav>
+      </aside>
+      <div class="main-area">
+        <header class="topbar">
+          <div class="search-bar">
+            <span>⌘ K</span>
+            <input type="search" class="global-search" placeholder="Search students or rooms" autocomplete="off" />
+          </div>
+          <div class="topbar-actions">
+            <button class="btn btn-ghost" data-action="toggle-sidebar">☰</button>
+            <button class="btn btn-ghost" data-action="toggle-theme">◑</button>
+          </div>
+        </header>
+
+        <main class="content-area">
+          <section class="section-card">
+            <header>
+              <div>
+                <p class="badge">Rooms</p>
+                <h2>Inventory</h2>
+              </div>
+              <a class="btn btn-primary" href="add-room.html">Add room</a>
+            </header>
+            <div class="table-wrapper">
+              <table id="roomsTable">
+                <thead>
+                  <tr>
+                    <th>ID</th>
+                    <th>Room</th>
+                    <th>Type</th>
+                    <th>Capacity</th>
+                    <th>Occupied</th>
+                    <th>Floor</th>
+                    <th>Available</th>
+                    <th>Monthly Fee</th>
+                    <th>Wi‑Fi</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody></tbody>
+              </table>
+            </div>
+          </section>
+
+          <section class="section-card">
+            <header>
+              <h3>Room snapshot</h3>
+              <p class="badge">Live data</p>
+            </header>
+            <div id="roomInfo" class="list-card">
+              <p>Select a room to view allocations and floor context.</p>
+            </div>
+          </section>
+        </main>
+
+        <footer class="app-footer">© <span id="year"></span> HostelMate • Room intelligence.</footer>
+      </div>
+    </div>
+
+    <div id="modal" class="modal">
+      <div class="modal-content">
+        <p id="modal-message">Are you sure?</p>
+        <div class="form-actions">
+          <button id="modal-cancel" class="btn btn-secondary" type="button">Cancel</button>
+          <button id="modal-confirm" class="btn btn-primary" type="button">Confirm</button>
+        </div>
+      </div>
+    </div>
+    <div id="toast-container" class="toast-container"></div>
+
+    <div id="editRoomModal" class="modal">
+      <div class="modal-content">
+        <h4>Edit room</h4>
+        <div class="form-grid">
+          <div class="form-control">
+            <label for="edit_room_number">Room number</label>
+            <input id="edit_room_number" type="text" placeholder="Room label (e.g., A1, B-203)" maxlength="12" required />
+          </div>
+          <div class="form-control">
+            <label for="edit_room_type">Room type / label</label>
+            <input id="edit_room_type" type="text" placeholder="Single, Twin, Deluxe" />
+          </div>
+        </div>
+        <div class="form-grid">
+          <div class="form-control">
+            <label for="edit_capacity">Capacity (beds)</label>
+            <input id="edit_capacity" type="number" min="1" max="50" step="1" required />
+          </div>
+          <div class="form-control">
+            <label for="edit_monthly_fee">Monthly fee (PKR)</label>
+            <input id="edit_monthly_fee" type="number" min="0" max="500000" step="500" required />
+          </div>
+        </div>
+        <div class="form-grid">
+          <div class="form-control">
+            <label for="edit_floor_level">Floor</label>
+            <input id="edit_floor_level" type="number" min="-2" max="50" step="1" required />
+          </div>
+          <label class="form-control" style="flex-direction: row; align-items: center; gap: 0.75rem;">
+            <input id="edit_wifi" type="checkbox" />
+            Wi‑Fi available on this room/floor
+          </label>
+        </div>
+        <div class="form-actions">
+          <button id="edit-room-cancel" class="btn btn-secondary" type="button">Cancel</button>
+          <button id="edit-room-save" class="btn btn-primary" type="button">Save changes</button>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      document.getElementById("year").textContent = new Date().getFullYear();
+    </script>
+    <script type="module" src="js/main.js"></script>
+  </body>
+</html>
+
