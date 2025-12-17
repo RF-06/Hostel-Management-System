@@ -97,6 +97,13 @@ const validateRoomFormPayload = (payload, { requireAll = true } = {}) => {
   if (payload.room_number && payload.room_number.trim().length > 12) {
     errors.push("Room number must be under 12 characters");
   }
+  if (payload.room_number) {
+    const roomNum = payload.room_number.trim();
+    const numericRoom = Number(roomNum);
+    if (!Number.isNaN(numericRoom) && numericRoom < 0) {
+      errors.push("Room number cannot be negative");
+    }
+  }
   if (payload.capacity !== undefined) {
     if (!Number.isFinite(payload.capacity) || payload.capacity <= 0 || payload.capacity > 50) {
       errors.push("Capacity must be between 1 and 50");
@@ -114,8 +121,8 @@ const validateRoomFormPayload = (payload, { requireAll = true } = {}) => {
   }
 
   if (payload.floor_level !== undefined) {
-    if (!Number.isInteger(payload.floor_level) || payload.floor_level < -5 || payload.floor_level > 200) {
-      errors.push("Floor must be an integer between -5 and 200");
+    if (!Number.isInteger(payload.floor_level) || payload.floor_level < 0 || payload.floor_level > 200) {
+      errors.push("Floor must be an integer between 0 and 200");
     }
   } else if (requireAll) {
     errors.push("Floor is required");

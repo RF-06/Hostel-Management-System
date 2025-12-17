@@ -189,6 +189,11 @@ const validateRoomPayload = (body, { requireAll = false } = {}) => {
       errors.push("Room number is required");
     } else if (clean.room_number.length > ROOM_NUMBER_MAX_LENGTH) {
       errors.push(`Room number must be under ${ROOM_NUMBER_MAX_LENGTH} characters`);
+    } else {
+      const numericRoom = Number(clean.room_number);
+      if (!Number.isNaN(numericRoom) && numericRoom < 0) {
+        errors.push("Room number cannot be negative");
+      }
     }
   } else if (requireAll) {
     errors.push("Room number is required");
@@ -222,8 +227,8 @@ const validateRoomPayload = (body, { requireAll = false } = {}) => {
 
   if (body.floor_level !== undefined) {
     const floor = Number(body.floor_level);
-    if (!Number.isInteger(floor) || floor < -5 || floor > 200) {
-      errors.push("Floor must be an integer between -5 and 200");
+    if (!Number.isInteger(floor) || floor < 0 || floor > 200) {
+      errors.push("Floor must be an integer between 0 and 200");
     } else {
       clean.floor_level = floor;
     }
